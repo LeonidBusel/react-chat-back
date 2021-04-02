@@ -36,7 +36,7 @@ const sendActiveUsers = (clients) => {
     }
 }
 
-const webSocketServer = new WebSocket.Server({ port });
+const webSocketServer = new WebSocket.Server({ port, cors: { origin: '*' } });
 
 webSocketServer.on('connection', ws => {
     const clientId = uuidv4();
