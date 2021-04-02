@@ -1,8 +1,7 @@
 const WebSocket = require('ws');
 const { v4: uuidv4 } = require('uuid');
 
-const host = process.env.HOST;
-const port = process.env.PORT;
+const port = process.env.PORT || 9000;
 
 const clients = {};
 let activeUser = [];
@@ -37,10 +36,7 @@ const sendActiveUsers = (clients) => {
     }
 }
 
-const webSocketServer = new WebSocket.Server({
-    host,
-    port
-});
+const webSocketServer = new WebSocket.Server({ port });
 
 webSocketServer.on('connection', ws => {
     const clientId = uuidv4();
@@ -103,7 +99,7 @@ webSocketServer.on('connection', ws => {
                 }
 
             }
-        } catch(err) {}
+        } catch (err) { }
     });
 
     ws.on('close', () => {
@@ -114,5 +110,5 @@ webSocketServer.on('connection', ws => {
         activeUser = activeUser.filter(user => user.clientId !== clientId);
 
         sendActiveUsers(clients);
-    })    
+    })
 });
