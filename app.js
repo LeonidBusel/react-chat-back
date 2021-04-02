@@ -52,6 +52,13 @@ webSocketServer.on('connection', ws => {
             const msg = JSON.parse(message);
 
             switch (msg.type) {
+                case "PING": {
+                    ws.send(JSON.stringify({
+                        type: "PONG"
+                    }));
+                    
+                    break;
+                }
                 case "LOGIN": {
                     const { nickName, nickColor } = msg;
 
