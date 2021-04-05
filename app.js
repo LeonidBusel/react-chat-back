@@ -80,7 +80,7 @@ webSocketServer.on('connection', ws => {
                     const userInfo = activeUser.find(user => user.clientId === clientId);
                     const { nickName, nickColor } = userInfo;
                     const now = new Date();
-                    const time = `${now.getHours()}:${now.getMinutes()}:${now.getSeconds()}`;
+                    const time = `${("0" + now.getHours()).slice(-2)}:${("0" + now.getMinutes()).slice(-2)}:${("0" + now.getSeconds()).slice(-2)}`;
 
                     messages.push({ id: uuidv4(), nickName, nickColor, message: msg.message, date: time });
 
